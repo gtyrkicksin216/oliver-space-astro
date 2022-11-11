@@ -23,7 +23,7 @@ const reviews: Review[] = await fetch(`http://localhost:3004/products/${productI
 	.catch(err => console.log(err))
 ---
 
-<FullWidthLayout title="Reviews">
+<FullWidthLayout title={`Oliver Space | Reviews for ${productData.name}`}>
 	<main class="reviews">
 		<RatingHeading rating={2} productData={productData} />
 		<section class="reviews__content"></section>
