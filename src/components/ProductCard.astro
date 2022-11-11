@@ -1,0 +1,48 @@
+---
+export interface Props {
+	name: string;
+	price: number;
+	href: string;
+}
+
+const { href, name, price } = Astro.props;
+---
+
+<li class="product-card">
+	<a href={href}>
+		<img
+			src="https://via.placeholder.com/200"
+			alt={`Placeholder image for ${name}`}
+			class="product-card__media"
+		>
+		<div class="product-card__info">
+			<p class="product-card__info-name">{name}</p>
+			<p class="product-card__info-price">${(price / 100)}</p>
+		</div>
+	</a>
+</li>
+<style lang="scss">
+.product-card {
+	flex: 0 1 auto;
+	font-size: 1.6rem;
+	&__media {
+		width: 100vw;
+		height: 100vw;
+		object-fit: contain;
+		@media (min-width: 449px) {
+			width: 200px;
+			height: 200px;
+		}
+	}
+	&__info {
+		display: flex;
+		flex-flow: column nowrap;
+		gap: 0.8rem;
+		margin-block-start: 0.8rem;
+		&-name {
+			font-size: 1.8rem;
+			font-weight: 600;
+		}
+	}
+}
+</style>

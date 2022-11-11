@@ -1,0 +1,39 @@
+---
+import '../../styles/index.scss'
+import RatingHeading from '../../components/RatingHeading.astro'
+import type { Product } from '../index.astro';
+import FullWidthLayout from '../../layouts/FullWidthLayout.astro'
+
+export interface Review {
+	id: number;
+	author: string;
+	star_rating: number;
+	location: string;
+	body: string;
+}
+
+export interface Params {
+	productId: number;
+}
+
+const { productId } = Astro.params
+const productData: Product = await fetch(`http://localhost:3004/products/${productId}`).then(res => res.json())
+const reviews: Review[] = await fetch(`http://localhost:3004/products/${productId}/reviews`)
+	.then(res => res.json())
+	.catch(err => console.log(err))
+---
+
+<FullWidthLayout title="Reviews">
+	<main class="reviews">
+		<RatingHeading rating={2} productData={productData} />
+		<section class="reviews__content"></section>
+	</main>
+</FullWidthLayout>
+
+<style lang="scss">
+.reviews {
+	&__content {
+		padding-inline: 1.6rem;
+	}
+}
+</style>
